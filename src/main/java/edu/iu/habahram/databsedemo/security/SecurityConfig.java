@@ -53,7 +53,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 HttpMethod.POST,"/signup", "/login").permitAll()
                         .requestMatchers(
-                                HttpMethod.GET,"/").permitAll()
+                                HttpMethod.GET,"/", "/flowers/{id}/image").permitAll()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session ->
