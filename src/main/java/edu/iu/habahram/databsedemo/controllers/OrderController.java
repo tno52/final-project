@@ -2,6 +2,7 @@ package edu.iu.habahram.databsedemo.controllers;
 
 import edu.iu.habahram.databsedemo.model.Order;
 import edu.iu.habahram.databsedemo.repository.OrderRepository;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,4 +50,18 @@ public class OrderController {
         List<Order> orders = orderRepository.findAllByCustomerUserName(username);
         return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
+
+    @PostMapping
+    public ResponseEntity<List<Order>> search(@RequestBody Order order) {
+        String username = getTheCurrentLoggedInCustomer();
+        System.out.println(username);
+        if(username.trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        Example<Order> example = Example.of(order);
+        List<Order> orders = (List<Order>) orderRepository.findAll(example);
+        return ResponseEntity.status(HttpStatus.OK).body(orders);
+    }
+
+
 }
