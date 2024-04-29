@@ -12,30 +12,30 @@ import java.util.Date;
 public class Order {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
-    private int flowerId;
+    private Integer flowerId;
     private String recipientName;
-    private float totalCost;
+    private Float totalCost;
     private String customerUserName;
 
 
     public Order() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getFlowerId() {
+    public Integer getFlowerId() {
         return flowerId;
     }
 
-    public void setFlowerId(int flowerId) {
+    public void setFlowerId(Integer flowerId) {
         this.flowerId = flowerId;
     }
 
@@ -47,11 +47,11 @@ public class Order {
         this.recipientName = recipientName;
     }
 
-    public float getTotalCost() {
+    public Float getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(float totalCost) {
+    public void setTotalCost(Float totalCost) {
         this.totalCost = totalCost;
     }
 
