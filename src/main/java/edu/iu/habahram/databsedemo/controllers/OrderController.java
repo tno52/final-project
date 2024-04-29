@@ -2,6 +2,7 @@ package edu.iu.habahram.databsedemo.controllers;
 
 import edu.iu.habahram.databsedemo.model.Order;
 import edu.iu.habahram.databsedemo.repository.OrderRepository;
+import edu.iu.habahram.databsedemo.services.OrderService;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +17,17 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    OrderRepository orderRepository;
+    OrderService orderService;
 
-    public OrderController(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @PostMapping
     public int add(@RequestBody Order order) {
         String username = getTheCurrentLoggedInCustomer();
         order.setCustomerUserName(username);
-        Order saved = orderRepository.save(order);
-        return saved.getId();
+        return orderService.add(order);
     }
 
     private String getTheCurrentLoggedInCustomer() {
@@ -47,19 +47,20 @@ public class OrderController {
         if(username.trim().isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        List<Order> orders = orderRepository.findAllByCustomerUserName(username);
+        List<Order> orders = orderService.findAllByCustomer(username);
         return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
 
-    @PostMapping
+    @PostMapping("/search")
     public ResponseEntity<List<Order>> search(@RequestBody Order order) {
         String username = getTheCurrentLoggedInCustomer();
         System.out.println(username);
         if(username.trim().isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } else {
+            order.setCustomerUserName(username);
         }
-        Example<Order> example = Example.of(order);
-        List<Order> orders = (List<Order>) orderRepository.findAll(example);
+        List<Order> orders = orderService.search(order);
         return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
 
