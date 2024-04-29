@@ -55,11 +55,16 @@ class OrderServiceTest {
     void findAllByCustomer() {
         List<Order> orders = orderService.findAllByCustomer("John");
         Assert.assertEquals(orders.size(), 1);
-        Assert.assertEquals(orders.get(0).getRecipientName(), "Jane");
-        Assert.assertEquals(orders.get(0).getFlowerId(), 2);
+        Assert.assertEquals("Jane", orders.get(0).getRecipientName());
+        Assert.assertEquals(2, orders.get(0).getFlowerId());
     }
 
     @Test
-    void search() {
+    void searchByFlowerId() {
+        Order order = new Order();
+        order.setFlowerId(2);
+        List<Order> result = orderService.search(order);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(2, result.get(0).getFlowerId());
     }
 }
