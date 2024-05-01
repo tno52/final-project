@@ -1,1 +1,1 @@
-create schema if not exists lectures;
+CREATE SCHEMA IF NOT EXISTS flowers;

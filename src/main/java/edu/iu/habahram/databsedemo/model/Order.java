@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(schema = "lectures", name="orders")
+@Table(schema = "flowers", name="orders")
 public class Order {
     @Id
     @GeneratedValue
@@ -18,10 +18,14 @@ public class Order {
     private String recipientName;
     private Float totalCost;
     private String customerUserName;
+    private String orderStatus;
 
 
     public Order() {
     }
+    public void setOrderStatus(String orderStatus) { this.orderStatus = orderStatus; }
+
+    public String getOrderStatus(){ return orderStatus; }
 
     public Integer getId() {
         return id;

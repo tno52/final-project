@@ -10,6 +10,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String greeting() {
-        return "Welcome to the database demo!";
+        return "Welcome to the final!";
     }
 }
