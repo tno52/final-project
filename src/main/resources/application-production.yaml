@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres://dpg-coha0uvsc6pc73ak5lk0-a.ohio-postgres.render.com/c322_postgresql
+    url: jdbc:postgresql://dpg-coha0uvsc6pc73ak5lk0-a.ohio-postgres.render.com/c322_postgresql
     username: c322_postgresql_user
     password: pKVeSIPQr3Cs519DccrbzPi3VgZJSCh3
 
